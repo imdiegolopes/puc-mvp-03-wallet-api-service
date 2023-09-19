@@ -97,5 +97,6 @@ Docker Container Name: wallet_api_service_container
 
 # API Design Documentation
 
-The Swagger file for this service is located at docs/open_api/swagger.yaml. It contains the API documentation and can be used with tools like Swagger UI to interact with the service.
-
+- Wallet Exchange Rate Service API - (https://github.com/imdiegolopes/puc-mvp-03-wallet-exchange-rate-service/blob/main/docs/open_api/swagger.yml)[Swaggr File]
+- Wallet Identity Service API - (https://github.com/imdiegolopes/puc-mvp-03-wallet-identity-service/blob/master/docs/open_api/swagger.yml)[Swaggr File]
+- Wallet Financial Service API - https://github.com/imdiegolopes/puc-mvp-03-wallet-financial-service/blob/main/docs/open_api/swagger.yml()[Swaggr File]
