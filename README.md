@@ -95,7 +95,7 @@ Docker Container Name: wallet_api_service_container
 
 # API Design Documentation
 
-- Wallet Exchange Rate Service API (Component B) - [Swagger File](https://github.com/imdiegolopes/puc-mvp-03-wallet-exchange-rate-service/blob/main/docs/open_api/swagger.yml)
+- Wallet Exchange Rate Service API (Component B) - [Swagger File](https://github.com/imdiegolopes/puc-mvp-03-wallet-exchange-rate-service/blob/master/docs/open_api/swagger.yml)
 - Wallet Identity Service API (Component C) - [Swagger File](https://github.com/imdiegolopes/puc-mvp-03-wallet-identity-service/blob/master/docs/open_api/swagger.yml)
 - Wallet Financial Service API (Component C) - [Swagger File](https://github.com/imdiegolopes/puc-mvp-03-wallet-financial-service/blob/main/docs/open_api/swagger.yml)
 
