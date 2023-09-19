@@ -1,0 +1,465 @@
+openapi: 3.0.0
+info:
+  title: Wallet Financial API Service
+  description: API service for managing financial assets
+  version: 1.0.0
+servers:
+  - url: http://localhost:5000
+paths:
+  /v1/assets:
+    get:
+      summary: Retrieve a list of assets
+      parameters:
+        - name: user_id
+          in: query
+          description: ID of the user
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                - user_id: 1
+                  name: "AAPL"
+                  type: "stock"
+                  quantity: 100
+                  value: 150.25
+                  purchase_on: "2023-09-15"
+      tags:
+        - Assets
+    post:
+      summary: Create a new asset
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                  description: ID of the user
+                name:
+                  type: string
+                  description: Name of the asset
+                type:
+                  type: string
+                  enum: ['stock', 'crypto', 'commodity', 'other']
+                  description: Type of the asset
+                quantity:
+                  type: number
+                  description: Quantity of the asset
+                value:
+                  type: number
+                  description: Value of the asset
+                purchase_on:
+                  type: string
+                  format: date
+                  description: Purchase date of the asset (YYYY-MM-DD)
+              required:
+                - user_id
+                - name
+                - type
+                - quantity
+                - value
+                - purchase_on
+            examples:
+              example1:
+                value:
+                  user_id: 1
+                  name: "AAPL"
+                  type: "stock"
+                  quantity: 100
+                  value: 150.25
+                  purchase_on: "2023-09-15"
+      responses:
+        '201':
+          description: Asset created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_id:
+                    type: integer
+                    description: ID of the user
+                  name:
+                    type: string
+                    description: Name of the asset
+                  type:
+                    type: string
+                    enum: ['stock', 'crypto', 'commodity', 'other']
+                    description: Type of the asset
+                  quantity:
+                    type: number
+                    description: Quantity of the asset
+                  value:
+                    type: number
+                    description: Value of the asset
+                  purchase_on:
+                    type: string
+                    format: date
+                    description: Purchase date of the asset (YYYY-MM-DD)
+              example:
+                user_id: 1
+                name: "AAPL"
+                type: "stock"
+                quantity: 100
+                value: 150.25
+                purchase_on: "2023-09-15"
+      tags:
+        - Assets
+
+  /v1/assets/{asset_id}:
+    get:
+      summary: Retrieve an asset by ID
+      parameters:
+        - name: asset_id
+          in: path
+          description: ID of the asset
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              example:
+                user_id: 1
+                name: "AAPL"
+                type: "stock"
+                quantity: 100
+                value: 150.25
+                purchase_on: "2023-09-15"
+        '404':
+          description: Asset not found
+          content:
+            application/json:
+              example:
+                error: "asset not found"
+      tags:
+        - Assets
+    put:
+      summary: Update an existing asset
+      parameters:
+        - name: asset_id
+          in: path
+          description: ID of the asset
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                  description: ID of the user
+                name:
+                  type: string
+                  description: Name of the asset
+                type:
+                  type: string
+                  enum: ['stock', 'crypto', 'commodity', 'other']
+                  description: Type of the asset
+                quantity:
+                  type: number
+                  description: Quantity of the asset
+                value:
+                  type: number
+                  description: Value of the asset
+                purchase_on:
+                  type: string
+                  format: date
+                  description: Purchase date of the asset (YYYY-MM-DD)
+              required:
+                - user_id
+                - name
+                - type
+                - quantity
+                - value
+                - purchase_on
+            examples:
+              example1:
+                value:
+                  user_id: 1
+                  name: "AAPL"
+                  type: "stock"
+                  quantity: 100
+                  value: 150.25
+                  purchase_on: "2023-09-15"
+      responses:
+        '200':
+          description: Asset updated successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_id:
+                    type: integer
+                    description: ID of the user
+                  name:
+                    type: string
+                    description: Name of the asset
+                  type:
+                    type: string
+                    enum: ['stock', 'crypto', 'commodity', 'other']
+                    description: Type of the asset
+                  quantity:
+                    type: number
+                    description: Quantity of the asset
+                  value:
+                    type: number
+                    description: Value of the asset
+                  purchase_on:
+                    type: string
+                    format: date
+                    description: Purchase date of the asset (YYYY-MM-DD)
+              example:
+                user_id: 1
+                name: "AAPL"
+                type: "stock"
+                quantity: 100
+                value: 150.25
+                purchase_on: "2023-09-15"
+      tags:
+        - Assets
+
+    delete:
+      summary: Delete an asset by ID
+      parameters:
+        - name: asset_id
+          in: path
+          description: ID of the asset
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Asset deleted successfully
+          content:
+            application/json:
+              example:
+                message: "asset deleted"
+        '404':
+          description: Asset not found
+          content:
+            application/json:
+              example:
+                error: "asset not found"
+      tags:
+        - Assets
+
+  /v1/transactions:
+      get:
+        summary: Get Transactions
+        parameters:
+          - name: user_id
+            in: query
+            description: User ID
+            required: false
+            schema:
+              type: string
+        responses:
+          '200':
+            description: Successful response
+            content:
+              application/json:
+                example:
+                  - ID: 1
+                    user_id: 1
+                    asset_id: 1
+                    type: 'buy'
+                    quantity: 10
+                    created_on: '2023-09-15'
+                    updated_on: '2023-09-16'
+                    price: 100.0
+                  - ID: 2
+                    user_id: 1
+                    asset_id: 2
+                    type: 'sell'
+                    quantity: 5
+                    created_on: '2023-09-17'
+                    updated_on: '2023-09-18'
+                    price: 120.0
+        tags:
+        - Transactions
+      post:
+        summary: Create Transaction
+        requestBody:
+          required: true
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  user_id:
+                    type: integer
+                  asset_id:
+                    type: integer
+                  type:
+                    type: string
+                  quantity:
+                    type: number
+                  created_on:
+                    type: string
+                    format: date
+                  updated_on:
+                    type: string
+                    format: date
+                  price:
+                    type: number
+              example:
+                user_id: 1
+                asset_id: 1
+                type: 'buy'
+                quantity: 10
+                created_on: '2023-09-15'
+                updated_on: '2023-09-16'
+                price: 100.0
+        responses:
+          '201':
+            description: Transaction created successfully
+            content:
+              application/json:
+                example:
+                  ID: 3
+                  user_id: 1
+                  asset_id: 1
+                  type: 'buy'
+                  quantity: 10
+                  created_on: '2023-09-15'
+                  updated_on: '2023-09-16'
+                  price: 100.0
+
+        tags:
+          - Transactions
+
+  /v1/transactions/{transaction_id}:
+    get:
+      summary: Get Transaction by ID
+      parameters:
+        - name: transaction_id
+          in: path
+          description: Transaction ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                ID: 1
+                user_id: 1
+                asset_id: 1
+                type: 'buy'
+                quantity: 10
+                created_on: '2023-09-15'
+                updated_on: '2023-09-16'
+                price: 100.0
+      tags:
+        - Transactions
+    put:
+      summary: Update Transaction by ID
+      parameters:
+        - name: transaction_id
+          in: path
+          description: Transaction ID
+          required: true
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                user_id:
+                  type: integer
+                asset_id:
+                  type: integer
+                type:
+                  type: string
+                quantity:
+                  type: number
+                created_on:
+                  type: string
+                  format: date
+                updated_on:
+                  type: string
+                  format: date
+                price:
+                  type: number
+            example:
+              user_id: 1
+              asset_id: 1
+              type: 'buy'
+              quantity: 10
+              created_on: '2023-09-15'
+              updated_on: '2023-09-16'
+              price: 100.0
+      responses:
+        '200':
+          description: Transaction updated successfully
+          content:
+            application/json:
+              example:
+                ID: 1
+                user_id: 1
+                asset_id: 1
+                type: 'buy'
+                quantity: 10
+                created_on: '2023-09-15'
+                updated_on: '2023-09-16'
+                price: 100.0
+      tags:
+        - Transactions
+    delete:
+      summary: Delete Transaction by ID
+      parameters:
+        - name: transaction_id
+          in: path
+          description: Transaction ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Transaction deleted successfully
+          content:
+            application/json:
+              example:
+                message: 'transaction deleted'
+
+      tags:
+        - Transactions
+  /v1/balance/{user_id}:
+    get:
+      summary: Get User Balance
+      parameters:
+        - name: user_id
+          in: path
+          description: User ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              example:
+                balance: 500.0
+      tags:
+        - Balance
+
