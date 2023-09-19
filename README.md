@@ -86,8 +86,6 @@ export PYTHONPATH=$(shell pwd)
 
 - make stop: Stop and remove the running Docker container.
 
-- make db-migrate: Apply database migrations (assuming a SQL migration file is available at src/infra/db/database/migration.sql).
-
 ## Docker Image and Container Naming
 
 ```
