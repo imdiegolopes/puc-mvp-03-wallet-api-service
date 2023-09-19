@@ -86,6 +86,8 @@ export PYTHONPATH=$(shell pwd)
 
 - make stop: Stop and remove the running Docker container.
 
+- make create_network: Create the Docker Network "my_network"
+
 ## Docker Image and Container Naming
 
 ```

@@ -7,9 +7,9 @@ class ProxyHandler:
 
     def handle(path):
         SERVERS = {
-            'EXCHANGE_RATES_SERVICE': 'http://localhost:8081',
-            'IDENTITY_USER_SERVICE': 'http://localhost:8082',
-            'FINANCIAL_SERVICE': 'http://localhost:8083',
+            'EXCHANGE_RATES_SERVICE': 'http://wallet_exchange_rate_service_container:8081',
+            'IDENTITY_USER_SERVICE': 'http://wallet_user_identity_service_container:8082',
+            'FINANCIAL_SERVICE': 'http://wallet_financial_service_container:8083',
         }
 
         ROUTES = {
